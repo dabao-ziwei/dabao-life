@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>大寶｜紫微斗數</title>
   <meta name="description" content="大寶老師｜紫微斗數論命專家。提供線上排盤、預約、課程與教學文章。" />
+  <link rel="icon" href="/dabao-life/assets/logo.png">
 
   <style>
     :root{
@@ -19,7 +20,6 @@
       --max: 1120px;
     }
     *{ box-sizing: border-box; }
-    html,body{ height:100%; }
     body{
       margin:0;
       background: var(--bg);
@@ -136,16 +136,20 @@
       padding-top: 22px;
     }
 
+    /* ✅ 關鍵修正：用 aspect-ratio 撐高度，不再靠 img height:100% */
     .hero-media{
       background: #101010;
       border: 1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      min-height: 520px;
       position: relative;
+
+      /* 讓容器一定有高度（接近你原站比例） */
+      aspect-ratio: 4 / 5;
+      max-height: 560px;
     }
-    /* 保底：即使圖片沒載到，也有高度與視覺 */
+
     .hero-media::before{
       content:"";
       position:absolute; inset:0;
@@ -153,13 +157,19 @@
         radial-gradient(60% 60% at 30% 30%, rgba(214,178,122,.10), transparent 60%),
         linear-gradient(135deg, rgba(255,255,255,.04), rgba(0,0,0,0));
       pointer-events:none;
+      z-index: 0;
     }
+
+    /* ✅ 圖片高度改 auto，避免計算問題 */
     .hero-media img{
       width:100%;
-      height:100%;
+      height:auto;
       object-fit: cover;
       filter: contrast(1.05) saturate(1.02);
-      position: relative;
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
       z-index: 1;
     }
 
@@ -230,10 +240,10 @@
 
     @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; }
-      .hero-media{ min-height: 420px; }
       .hero-copy h1{ font-size: 44px; }
       .brand{ min-width: unset; }
       .menu{ gap: 14px; }
+      .hero-media{ max-height: 520px; }
     }
     @media (max-width: 560px){
       .announce{ font-size: 15px; }
@@ -252,7 +262,6 @@
       <div class="nav">
         <div class="brand">
           <div class="logo">
-            <!-- 用絕對路徑，避免子路徑解析問題 -->
             <img src="/dabao-life/assets/logo.png" alt="大寶紫微 Logo" />
           </div>
           <div class="brand-name">大寶｜紫微斗數</div>
@@ -290,7 +299,6 @@
       <div class="hero-grid">
 
         <div class="hero-media">
-          <!-- 用絕對路徑，避免 /dabao-life/ 子路徑解析問題 -->
           <img src="/dabao-life/assets/hero.jpg" alt="大寶老師" />
         </div>
 
