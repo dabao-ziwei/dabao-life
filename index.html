@@ -1,27 +1,118 @@
 <!doctype html>
 <html lang="zh-Hant">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>大寶紫微｜官網</title>
-    <style>
-      body { font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; margin: 0; }
-      .wrap { max-width: 860px; margin: 0 auto; padding: 56px 20px; line-height: 1.75; }
-      h1 { font-size: 28px; margin: 0 0 12px; }
-      p { margin: 0 0 16px; color: #222; }
-      a.button {
-        display: inline-block; padding: 10px 14px; border: 1px solid #111;
-        border-radius: 10px; text-decoration: none; color: #111;
-      }
-      .hint { font-size: 14px; color: #666; margin-top: 18px; }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <h1>大寶紫微｜官網</h1>
-      <p>新站建置中。這裡之後會放你的服務介紹、課程、文章與入口。</p>
-      <a class="button" href="https://ziweiapp.dabao.life">前往紫微斗數平台</a>
-      <div class="hint">（這是測試頁：確定 GitHub Pages 成功跑起來後，我們再開始搬內容與套版。）</div>
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>大寶紫微｜官網</title>
+  <meta name="description" content="大寶紫微｜以紫微斗數作為人生導航，提供論命、流年運勢與占卜諮詢。" />
+
+  <style>
+    :root {
+      --text: #111;
+      --muted: #666;
+      --border: #e5e5e5;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.8;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 64px 20px;
+    }
+    section {
+      margin-bottom: 72px;
+    }
+    h1 {
+      font-size: 32px;
+      margin: 0 0 12px;
+      letter-spacing: 0.02em;
+    }
+    h2 {
+      font-size: 22px;
+      margin: 0 0 16px;
+    }
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid var(--text);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 15px;
+    }
+    .list {
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+    }
+    .item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    footer {
+      font-size: 14px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Hero -->
+    <section>
+      <h1>大寶紫微</h1>
+      <p>我把紫微斗數當成「人生的導航儀」，不是用來恐嚇你未來會怎樣，而是陪你看清現在能怎麼走。</p>
+      <a class="btn" href="https://ziweiapp.dabao.life">前往紫微斗數平台</a>
+    </section>
+
+    <!-- Services -->
+    <section>
+      <h2>服務項目</h2>
+      <div class="list">
+        <div class="item">
+          <strong>紫微斗數論命</strong>
+          <p>以命盤結構理解人生節奏，協助你釐清當下的關鍵課題。</p>
+        </div>
+        <div class="item">
+          <strong>流年運勢解析</strong>
+          <p>不是預言好壞，而是看清每一年要面對的重點與資源配置。</p>
+        </div>
+        <div class="item">
+          <strong>紫微占卜諮詢</strong>
+          <p>當你卡在某個選擇點，需要一個更清楚的方向。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section>
+      <h2>關於我的方式</h2>
+      <p>我不相信命是拿來嚇人的。</p>
+      <p>煞與忌不是災難，而是提醒你：這一段路，需要多一點理解與準備。</p>
+      <p>選擇權始終在你手上，我只是陪你把地圖攤開。</p>
+    </section>
+
+    <!-- Contact -->
+    <section>
+      <h2>聯絡與入口</h2>
+      <p>若你想進一步使用系統功能，或了解服務細節，請前往平台。</p>
+      <a class="btn" href="https://ziweiapp.dabao.life">前往 ziweiapp</a>
+      <p style="margin-top:16px;">聯絡信箱：your@email.com</p>
+    </section>
+
+    <footer>
+      © 大寶紫微
+    </footer>
+
+  </div>
+</body>
 </html>
