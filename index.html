@@ -74,8 +74,7 @@
         .menu a { font-size: 0.95rem; color: #ccc; font-weight: 500; }
         .menu a:hover { color: var(--gold); }
         
-        /* 購物車圖示 */
-        .cart-icon { display: flex; align-items: center; gap: 5px; }
+        .cart-icon { display: flex; align-items: center; gap: 5px; cursor: pointer; }
 
         /* --- 2. 公告欄 --- */
         .announcement {
@@ -87,28 +86,24 @@
             border-bottom: 1px solid var(--border);
         }
 
-        /* --- 3. Hero 形象區 (左圖右文，無按鈕) --- */
+        /* --- 3. Hero 形象區 (嚴格左圖右文) --- */
         .hero {
             padding: 80px 0;
+            /* 模擬您官網那種深邃背景 */
             background: radial-gradient(circle at 30% 50%, #1a1a1a 0%, #111 70%);
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
+            grid-template-columns: 0.8fr 1.2fr; /* 左窄右寬 */
             gap: 60px;
             align-items: center;
         }
 
-        .hero-img {
-            position: relative;
-        }
         .hero-img img {
             width: 100%;
             border-radius: 8px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            /* 加上金色邊框光暈 */
-            border: 1px solid rgba(214, 178, 122, 0.2);
         }
 
         .hero-text h1 {
@@ -153,6 +148,8 @@
             padding: 30px;
             border-radius: 8px;
             transition: 0.3s;
+            display: flex;
+            flex-direction: column;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -160,7 +157,7 @@
         }
 
         .card h3 { font-size: 1.5rem; color: #fff; margin-bottom: 15px; }
-        .card p { font-size: 0.95rem; color: #aaa; margin-bottom: 20px; line-height: 1.6; }
+        .card p { font-size: 0.95rem; color: #aaa; margin-bottom: 20px; line-height: 1.6; flex-grow: 1; }
         
         .card-meta {
             margin-top: auto;
@@ -169,7 +166,6 @@
             font-size: 0.9rem;
             color: #888;
         }
-        .card-meta div { margin-bottom: 5px; }
         .card-price { color: var(--gold); font-size: 1.1rem; font-weight: 700; margin-top: 10px; }
 
         .btn-card {
@@ -184,50 +180,40 @@
         }
         .btn-card:hover { background: var(--gold); color: #000; border-color: var(--gold); }
 
-        /* --- 5. 客戶回饋牆 (重點新增！) --- */
+        /* --- 5. 客戶回饋牆 (自動載入 001-078.jpg) --- */
         .reviews-section {
             padding: 80px 0;
             background: #0d0d0d;
         }
 
         .reviews-container {
-            /* 這裡使用橫向捲動，模擬手機滑動的感覺，適合放大量長圖 */
             display: flex;
             overflow-x: auto;
             gap: 20px;
             padding: 20px 0;
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* 讓手機滑動更順暢 */
         }
         
-        /* 隱藏捲軸但保留功能 */
+        /* 隱藏捲軸樣式但保留功能 */
         .reviews-container::-webkit-scrollbar { height: 8px; }
         .reviews-container::-webkit-scrollbar-track { background: #111; }
         .reviews-container::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 
         .review-img {
-            flex: 0 0 auto; /* 不壓縮圖片 */
-            width: 300px; /* 設定每張截圖寬度，可依實際調整 */
+            flex: 0 0 auto;
+            width: 300px; /* 每張圖片寬度，可依需求調整 */
             border-radius: 8px;
             border: 1px solid #333;
             overflow: hidden;
+            background: #000;
         }
-        .review-img img { width: 100%; height: auto; }
+        .review-img img { width: 100%; height: auto; display: block; }
 
         /* --- 6. 常見問題 (FAQ) --- */
-        .faq-grid {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .faq-item {
-            border-bottom: 1px solid var(--border);
-            padding: 25px 0;
-        }
-        .faq-q {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
+        .faq-grid { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 25px 0; }
+        .faq-q { font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 10px; }
         .faq-a { color: #aaa; }
 
         /* --- Footer --- */
@@ -246,8 +232,7 @@
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-img { max-width: 400px; margin: 0 auto; }
             .hero-text h1 { font-size: 2.5rem; }
-            .reviews-container { gap: 15px; }
-            .review-img { width: 250px; }
+            .review-img { width: 260px; } /* 手機版圖片稍微縮小 */
         }
     </style>
 </head>
@@ -299,7 +284,7 @@
                     <h3>紫微斗數完整論命</h3>
                     <p>需要出生年、月、日、時、分。記載一生運勢、事件，掌握人生軌跡，做出計畫與預防。</p>
                     <div class="card-meta">
-                        <div>提醒未來數十年運勢走向 (不含流年細節)</div>
+                        <div>提醒未來數十年運勢走向</div>
                         <div>時長：60min / 一張盤</div>
                         <div class="card-price">NT$ 4,800</div>
                     </div>
@@ -384,15 +369,10 @@
             <h2 class="section-title">客戶真實回饋</h2>
             <p style="text-align: center; color: #888; margin-bottom: 30px;">
                 累積超過萬人服務經驗，真實對話截圖，好評如潮。<br>
-                (左右滑動查看更多)
+                (請左右滑動查看更多)
             </p>
             
-            <div class="reviews-container">
-                <div class="review-img"><img src="./assets/review-1.jpg" alt="客戶回饋"></div>
-                <div class="review-img"><img src="./assets/review-2.jpg" alt="客戶回饋"></div>
-                <div class="review-img"><img src="./assets/review-3.jpg" alt="客戶回饋"></div>
-                <div class="review-img"><img src="./assets/review-4.jpg" alt="客戶回饋"></div>
-                <div class="review-img"><img src="./assets/review-5.jpg" alt="客戶回饋"></div>
+            <div class="reviews-container" id="reviews-container">
                 </div>
         </div>
     </section>
@@ -431,6 +411,30 @@
             <p style="margin-top: 20px;">&copy; 2026 大寶紫微斗數</p>
         </div>
     </footer>
+
+    <script>
+        // 設定圖片數量：78 張
+        const totalImages = 78;
+        const container = document.getElementById('reviews-container');
+
+        for (let i = 1; i <= totalImages; i++) {
+            // 將數字轉為 001, 002, 015 格式
+            const paddedNum = String(i).padStart(3, '0');
+            const fileName = `${paddedNum}.jpg`;
+
+            // 建立 div 和 img 元素
+            const div = document.createElement('div');
+            div.className = 'review-img';
+            
+            const img = document.createElement('img');
+            img.src = `./assets/${fileName}`;
+            img.alt = `客戶回饋 ${paddedNum}`;
+            img.loading = "lazy"; // 加上懶載入，加快網頁速度
+
+            div.appendChild(img);
+            container.appendChild(div);
+        }
+    </script>
 
 </body>
 </html>
