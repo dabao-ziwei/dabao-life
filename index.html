@@ -9,16 +9,18 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-color: #111111;
-            --bg-secondary: #1a1a1a;
-            --text-main: #f0f0f0;
-            --text-muted: #b0b0b0;
-            --gold: #d6b27a;
-            --border: rgba(255, 255, 255, 0.1);
+            /* 依照截圖吸取的色碼 */
+            --bg-body: #111111; 
+            --bg-header: #000000;
+            --text-white: #ffffff;
+            --text-grey: #cccccc;
+            --gold: #d4af37; /* 更有質感的暗金 */
+            --gold-hover: #f3e5ab;
+            --border-color: rgba(255, 255, 255, 0.1);
             --container-width: 1200px;
         }
 
@@ -26,32 +28,29 @@
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-body);
+            color: var(--text-white);
             line-height: 1.8;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .brand { font-family: 'Noto Serif TC', serif; }
+        h1, h2, h3 { font-family: 'Noto Serif TC', serif; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         img { display: block; max-width: 100%; }
 
         .container {
             max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px; /* 增加兩側留白 */
         }
 
-        /* --- 1. 導覽列 --- */
+        /* --- 1. 導覽列 (Header) --- */
         .navbar {
-            background-color: #000;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background-color: var(--bg-header);
+            padding: 20px 0;
+            border-bottom: 1px solid #222;
         }
-        
+
         .nav-inner {
             display: flex;
             justify-content: space-between;
@@ -61,151 +60,173 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.5rem;
-            color: var(--gold);
+            gap: 15px;
+            font-size: 1.3rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Logo 圖片樣式 */
+        .brand-logo {
+            height: 45px;
+            width: 45px;
+            background: #333; /* 預防圖片未載入時的佔位色 */
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .brand-text {
+            font-family: 'Noto Serif TC', serif;
             font-weight: 700;
         }
-        .brand img { height: 45px; border-radius: 4px; }
-        .brand span { color: #fff; }
+        .text-gold { color: var(--gold); }
+        .text-white { color: #fff; }
 
-        .menu { display: flex; gap: 25px; align-items: center; }
-        .menu a { font-size: 0.95rem; color: #ccc; font-weight: 500; }
-        .menu a:hover { color: var(--gold); }
-        .cart-icon { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        /* 選單連結樣式 - 純文字無按鈕感 */
+        .menu a {
+            font-size: 0.95rem;
+            color: #ddd;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            position: relative;
+        }
+
+        .menu a:hover {
+            color: var(--gold);
+        }
+
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .cart-icon:hover { color: var(--gold); }
 
         /* --- 2. 公告欄 --- */
         .announcement {
-            background: #1a1a1a;
+            background-color: #1a1a1a;
             color: var(--gold);
             text-align: center;
-            padding: 12px 0;
-            font-size: 0.95rem;
-            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid #222;
         }
 
-        /* --- 3. Hero 形象區 (修正版：加入按鈕) --- */
-        .hero {
+        /* --- 3. 人物介紹區 (Hero) - 嚴格依照 image_891b96.jpg --- */
+        .hero-section {
             padding: 80px 0;
-            background: radial-gradient(circle at 30% 50%, #1a1a1a 0%, #111 70%);
+            background-color: var(--bg-body);
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
-            gap: 60px;
-            align-items: start; /* 對齊頂部，讓文字自然延伸 */
+            grid-template-columns: 0.8fr 1.2fr; /* 左窄右寬 */
+            gap: 80px; /* 拉大間距 */
+            align-items: start;
         }
 
-        .hero-img img {
+        /* 左側照片 */
+        .hero-image {
+            position: relative;
+        }
+        .hero-image img {
             width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            border-radius: 0; /* 截圖中看起來是直角或極小圓角 */
+            box-shadow: 0 0 30px rgba(0,0,0,0.8); /* 深邃陰影 */
         }
 
-        .hero-text h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
+        /* 右側文字 */
+        .hero-content {
+            padding-top: 10px;
+        }
+
+        .hero-name {
+            font-size: 3.5rem; /* 大標題 */
+            font-weight: 900; /* 特粗 */
             color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.2;
         }
 
-        .hero-subtitle {
-            font-size: 1.4rem;
+        .hero-title {
+            font-family: 'Noto Sans TC', sans-serif; /* 截圖中副標題偏黑體 */
+            font-size: 1.2rem;
             color: var(--gold);
-            margin-bottom: 30px;
-            display: block;
             font-weight: 500;
+            margin-bottom: 40px;
+            display: block;
+            letter-spacing: 0.1em;
         }
 
         .hero-desc p {
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: #bbb;
             margin-bottom: 25px;
-            text-align: justify;
+            line-height: 1.9;
+            text-align: justify; /* 左右對齊 */
         }
 
-        /* 重點修正：Hero 區塊的按鈕樣式 (依據截圖) */
-        .hero-btn {
+        /* 金框透明按鈕 - 依照 image_8a0015.jpg */
+        .btn-outline-gold {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 30px;
             padding: 12px 40px;
-            border: 1px solid var(--gold); /* 金色邊框 */
+            border: 1px solid var(--gold);
             color: #fff;
             font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
             background: transparent;
+            letter-spacing: 0.1em;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
-        
-        .hero-btn:hover {
+
+        .btn-outline-gold:hover {
             background: var(--gold);
             color: #000;
-            box-shadow: 0 0 15px rgba(214, 178, 122, 0.4);
         }
 
-        /* --- 4. 服務列表 --- */
-        .section { padding: 80px 0; border-bottom: 1px solid var(--border); }
-        .section-title {
-            font-size: 2.2rem;
-            color: var(--gold);
-            text-align: center;
-            margin-bottom: 50px;
+        /* --- 4. 服務列表區 --- */
+        .services-section {
+            padding: 60px 0 100px;
+            border-top: 1px solid #222;
         }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 8px;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        .card:hover { transform: translateY(-5px); border-color: var(--gold); }
-        .card h3 { font-size: 1.5rem; color: #fff; margin-bottom: 15px; }
-        .card p { font-size: 0.95rem; color: #aaa; margin-bottom: 20px; line-height: 1.6; flex-grow: 1; }
         
-        .card-meta {
-            margin-top: auto;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 15px;
-            font-size: 0.9rem;
-            color: #888;
-        }
-        .card-price { color: var(--gold); font-size: 1.1rem; font-weight: 700; margin-top: 10px; }
-        .btn-card {
-            display: block; text-align: center; margin-top: 20px; padding: 10px 0;
-            border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 4px; font-size: 0.9rem;
-        }
-        .btn-card:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+        /* 暫時隱藏原本的 Grid，因為您只要求首頁復刻，這裡保留結構以免空白 */
+        /* 您可以自行決定是否要保留這塊，或是這塊已經是 "服務頁面" 的內容 */
 
-        /* --- 5. 客戶回饋牆 (三欄瀑布流) --- */
+        /* --- 5. 客戶回饋牆 (瀑布流) - 依照 image_93e95f.jpg --- */
         .reviews-section {
-            padding: 80px 0;
-            background: #0d0d0d;
+            padding: 80px 0 120px;
+            background-color: #0d0d0d; /* 比背景再深一點 */
         }
 
-        /* 瀑布流容器 */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        /* 真正的瀑布流排版 */
         #waterfall-container {
-            column-count: 3; /* 設定三欄 */
+            column-count: 3; /* 三欄 */
             column-gap: 20px; /* 欄間距 */
-            width: 100%;
         }
 
         .review-item {
-            break-inside: avoid; /* 防止圖片被切斷 */
-            margin-bottom: 20px; /* 圖片下方間距 */
-            background: #000;
-            border: 1px solid #333;
+            break-inside: avoid; /* 避免圖片被切斷 */
+            margin-bottom: 20px; /* 上下間距 */
             border-radius: 8px;
             overflow: hidden;
+            background: #fff; /* 預設白底，以防圖片透明 */
         }
 
         .review-item img {
@@ -214,233 +235,121 @@
             display: block;
         }
 
-        /* --- 6. 常見問題 --- */
-        .faq-grid { max-width: 800px; margin: 0 auto; }
-        .faq-item { border-bottom: 1px solid var(--border); padding: 25px 0; }
-        .faq-q { font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 10px; }
-        .faq-a { color: #aaa; }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center; padding: 40px 0; color: #666; font-size: 0.9rem; border-top: 1px solid var(--border);
+        /* --- RWD 響應式 --- */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-image { max-width: 500px; margin: 0 auto; }
+            .hero-content { text-align: left; }
+            #waterfall-container { column-count: 2; }
         }
 
-        /* RWD 調整 */
-        @media (max-width: 900px) {
-            #waterfall-container { column-count: 2; } /* 平板變兩欄 */
-            .hero-grid { grid-template-columns: 1fr; }
-            .hero-img { max-width: 500px; margin: 0 auto 40px; }
-            .hero-text { text-align: left; }
-        }
-
-        @media (max-width: 600px) {
-            #waterfall-container { column-count: 1; } /* 手機變單欄 */
+        @media (max-width: 768px) {
             .nav-inner { flex-direction: column; gap: 15px; }
-            .menu { flex-wrap: wrap; justify-content: center; }
-            .hero-text h1 { font-size: 2.5rem; }
+            .menu { flex-wrap: wrap; justify-content: center; font-size: 0.9rem; }
+            .hero-name { font-size: 2.5rem; }
+            #waterfall-container { column-count: 1; } /* 手機單欄 */
+            .container { padding: 0 20px; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
+    <header class="navbar">
         <div class="container nav-inner">
             <a href="#" class="brand">
-                <img src="./assets/logo.png" alt="Logo">
-                <span style="color: var(--gold);">大寶</span>｜<span>紫微斗數</span>
+                <img src="./assets/logo.png" alt="Logo" class="brand-logo">
+                <div class="brand-text">
+                    <span class="text-gold">大寶</span> | <span class="text-white">紫微斗數</span>
+                </div>
             </a>
-            <div class="menu">
+
+            <nav class="menu">
                 <a href="https://ziweiapp.dabao.life" target="_blank">線上排盤</a>
                 <a href="#line">線上預約</a>
                 <a href="#course">【實戰紫微斗數】課程</a>
                 <a href="https://vocus.cc/salon/dabao" target="_blank">紫微斗數教學文章</a>
-                <a href="#cart" class="cart-icon">購物車 🛒</a>
-            </div>
+                
+                <div class="cart-icon" title="購物車">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span style="font-size: 0.9rem; margin-left: 5px;">購物車</span>
+                </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <div class="announcement">
-        【公告】2026首發！實戰紫微斗數【初階班】(2026/3/4開課)早鳥特惠中，詳洽官方Line
+        【公告】 2026首發！實戰紫微斗數【初階班】 (2026/3/4開課)早鳥特惠中，詳洽官方Line
     </div>
 
-    <section class="hero">
+    <section class="hero-section">
         <div class="container hero-grid">
-            <div class="hero-img">
+            <div class="hero-image">
                 <img src="./assets/hero.jpg" alt="大寶老師">
             </div>
-            
-            <div class="hero-text">
-                <h1>大寶老師</h1>
-                <span class="hero-subtitle">紫微斗數論命專家</span>
-                
+
+            <div class="hero-content">
+                <h1 class="hero-name">大寶老師</h1>
+                <span class="hero-title">紫微斗數論命專家</span>
+
                 <div class="hero-desc">
-                    <p>擁有十餘年命理經驗的大寶老師，精通【紫微斗數】、【紫微占卜】、【風水改運】、【符咒改運】、【姓名改運】及【吉時擇日】，已成功服務逾萬人，助他們在生活中找到方向與最佳位置。</p>
-                    <p>我深信每個人都有其獨特的命盤和人生課題，透過細緻的分析與建議，我將幫助您更了解自己，藉以發掘潛力，掌握機會，做出明智的選擇。</p>
-                    <p>商業需要顧問，愛情需要顧問，理財需要顧問，而人生更需要專業的指導。人生道路千百條，透過我的專業紫微斗數命盤分析，我將協助您找到最適合您的那一條人生路徑。</p>
-                    <p>如果老天真的為您規劃了一條相對顛簸的路徑，也可以透過改善風水、變更姓名、催化符令...幫助您修改運勢，讓您逆風而上，翻轉人生。</p>
+                    <p>
+                        擁有十餘年命理經驗的大寶老師，精通【紫微斗數】、【紫微占卜】、【風水改運】、【符咒改運】、【姓名改運】及【吉時擇日】，已成功服務逾萬人，助他們在生活中找到方向與最佳位置。
+                    </p>
+                    <p>
+                        我深信每個人都有其獨特的命盤和人生課題，透過細緻的分析與建議，我將幫助您更了解自己，藉以發掘潛力，掌握機會，做出明智的選擇。
+                    </p>
+                    <p>
+                        商業需要顧問，愛情需要顧問，理財需要顧問，而人生更需要專業的指導。人生道路千百條，透過我的專業紫微斗數命盤分析，我將協助您找到最適合您的那一條人生路徑。
+                    </p>
+                    <p>
+                        如果老天真的為您規劃了一條相對顛簸的路徑，也可以透過改善風水、變更姓名、催化符令...幫助您修改運勢，讓您逆風而上，翻轉人生。
+                    </p>
                 </div>
 
-                <a href="#line" class="hero-btn">加入【官方Line】立刻預約</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">大寶老師的命理諮詢服務</h2>
-            <div class="services-grid">
-                <div class="card">
-                    <h3>紫微斗數完整論命</h3>
-                    <p>需要出生年、月、日、時、分。記載一生運勢、事件，掌握人生軌跡，做出計畫與預防。</p>
-                    <div class="card-meta">
-                        <div>提醒未來數十年運勢走向</div>
-                        <div>時長：60min / 一張盤</div>
-                        <div class="card-price">NT$ 4,800</div>
-                    </div>
-                    <a href="#line" class="btn-card">加入官方 Line 預約</a>
-                </div>
-                <div class="card">
-                    <h3>流年運勢分析</h3>
-                    <p>針對「特定年份」進行運勢分析，包含當年度應注意事項(結婚、重病、生子、車關...)。</p>
-                    <div class="card-meta">
-                        <div>當年度逐月分析</div>
-                        <div>時長：40min / 一張盤</div>
-                        <div class="card-price">NT$ 3,600</div>
-                    </div>
-                    <a href="#line" class="btn-card">加入官方 Line 預約</a>
-                </div>
-                <div class="card">
-                    <h3>紫微占卜</h3>
-                    <p>透過4個數字引動盤象。針對「半年內」已決定或未決定的單一事件進行吉凶占測。</p>
-                    <div class="card-meta">
-                        <div>不需個資 (姓名、生日皆免)</div>
-                        <div>時長：30min</div>
-                        <div class="card-price">NT$ 1,800</div>
-                    </div>
-                    <a href="https://ziweiapp.dabao.life" class="btn-card" target="_blank">前往占卜平台</a>
-                </div>
-                <div class="card">
-                    <h3>風水佈陣改運</h3>
-                    <p>環境對人有潛移默化的影響。好的居家或辦公風水能讓人事半功倍。</p>
-                    <div class="card-meta">
-                        <div>現場堪輿、給出佈局建議</div>
-                        <div>時長：30min / 一個物件</div>
-                        <div class="card-price">NT$ 12,800 (限雙北桃園)</div>
-                    </div>
-                    <a href="#line" class="btn-card">洽詢官方 Line</a>
-                </div>
-                <div class="card">
-                    <h3>符令改運</h3>
-                    <p>師承正一道，正統畫符工序(請神、勅水、勅筆...)手工撰寫。助財運、事業、桃花。</p>
-                    <div class="card-meta">
-                        <div>依需求客製化開符</div>
-                        <div>含運費 (海外另計)</div>
-                        <div class="card-price">請洽詢官方 Line</div>
-                    </div>
-                    <a href="#line" class="btn-card">洽詢官方 Line</a>
-                </div>
-                <div class="card">
-                    <h3>姓名改運</h3>
-                    <p>名字是每天使用的咒語。搭配紫微命盤星曜、五行，打造能改善運勢的最佳名稱。</p>
-                    <div class="card-meta">
-                        <div>提供10組建議供挑選</div>
-                        <div>5個工作天交件</div>
-                        <div class="card-price">NT$ 3,600 / 次</div>
-                    </div>
-                    <a href="#line" class="btn-card">洽詢官方 Line</a>
-                </div>
-                <div class="card">
-                    <h3>實戰紫微斗數教學</h3>
-                    <p>從初階到職業班。培養良好命理觀念與準確論命能力。自己的命自己算。</p>
-                    <div class="card-meta">
-                        <div>每週一次，每期12週</div>
-                        <div>每週上課2小時</div>
-                        <div class="card-price">早鳥價 NT$ 19,800</div>
-                    </div>
-                    <a href="#line" class="btn-card">了解課程詳情</a>
-                </div>
-                <div class="card">
-                    <h3>異業合作</h3>
-                    <p>不論您從事何種行業，若您有想要與命理結合的絕妙想法，歡迎洽談。</p>
-                    <a href="#line" class="btn-card">洽談合作</a>
-                </div>
-                <div class="card">
-                    <h3>其他項目</h3>
-                    <p>有其他問題？請先看下方常見問題，或直接諮詢官方Line。</p>
-                    <a href="#faq" class="btn-card">查看常見問題</a>
-                </div>
+                <a href="#line" class="btn-outline-gold">加入【官方Line】立刻預約</a>
             </div>
         </div>
     </section>
 
     <section class="reviews-section">
         <div class="container">
-            <h2 class="section-title">客戶真實回饋</h2>
-            <p style="text-align: center; color: #888; margin-bottom: 30px;">
-                累積超過萬人服務經驗，真實對話截圖，好評如潮。
-            </p>
+            <h2 class="section-title">客戶回饋</h2>
             
             <div id="waterfall-container"></div>
         </div>
     </section>
 
-    <section class="section" id="faq">
+    <footer style="text-align: center; padding: 40px 0; color: #666; font-size: 0.9rem; border-top: 1px solid #222;">
         <div class="container">
-            <h2 class="section-title">常見問題</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-q">Q: 【完整論命】跟【紫微占卜】差異？我該預約哪個？</div>
-                    <div class="faq-a">A: 完整論命看一生大運，需要生辰八字；占卜看半年內單一事件吉凶，不需個資。想通盤了解選論命，想問短期決定選占卜。</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q">Q: 老師在哪裡？需要見面才能進行嗎？</div>
-                    <div class="faq-a">A: 除風水堪輿外，皆採線上語音通話進行，省去舟車勞頓，效果無異。</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q">Q: 常算命是不是會越算命越差？</div>
-                    <div class="faq-a">A: 紫微斗數是人生的導航地圖。提前知道路況是為了趨吉避凶，不會讓命變薄。</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q">Q: 我沒有帶天命也可以學習紫微斗數嗎？</div>
-                    <div class="faq-a">A: 當然可以！只要有興趣與練習，就像學開車一樣，不需要天命。</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q">Q: 有急件服務嗎？</div>
-                    <div class="faq-a">A: 可支付2倍費用優先安排（視老師時段而定），請洽官方Line。</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>大寶老師的社群：<a href="https://www.threads.net/@read_urface" target="_blank" style="color:var(--gold);">Threads</a> | <a href="#" style="color:var(--gold);">Instagram</a></p>
-            <p style="margin-top: 20px;">&copy; 2026 大寶紫微斗數</p>
+            <p>&copy; 2026 大寶紫微斗數 | 寶曜文化</p>
         </div>
     </footer>
 
     <script>
-        const totalImages = 79; // 更新為 79 張
+        // 設定圖片總數：79 張
+        const totalImages = 79;
         const container = document.getElementById('waterfall-container');
 
         for (let i = 1; i <= totalImages; i++) {
-            // 檔名補零 (001.jpg)
+            // 將數字轉為 001, 002... 格式
             const paddedNum = String(i).padStart(3, '0');
+            // 檔名假設為小寫 .jpg
             const fileName = `${paddedNum}.jpg`;
 
             const div = document.createElement('div');
             div.className = 'review-item';
             
             const img = document.createElement('img');
-            // 注意：這裡是相對路徑，請確保資料夾名稱是 assets
             img.src = `./assets/${fileName}`; 
             img.alt = `客戶回饋 ${paddedNum}`;
-            img.loading = "lazy";
+            img.loading = "lazy"; // 懶加載，提升速度
 
-            // 錯誤處理：如果圖片讀取失敗，在 console 顯示
+            // 如果圖片載入失敗 (例如檔名大小寫不對)，隱藏該區塊以免破壞版面
             img.onerror = function() {
-                console.warn(`找不到圖片: ${fileName}，請確認檔名大小寫或路徑是否正確`);
-                this.style.display = 'none'; // 隱藏破圖
+                console.warn(`無法載入圖片: ${fileName}`);
+                this.parentElement.style.display = 'none';
             };
 
             div.appendChild(img);
