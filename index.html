@@ -9,19 +9,18 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* 依照截圖吸取的色碼 */
             --bg-body: #111111; 
-            --bg-header: #000000;
+            --bg-header: #1a1a1a; /* Header 稍微亮一點點的黑 */
             --text-white: #ffffff;
             --text-grey: #cccccc;
-            --gold: #d4af37; /* 更有質感的暗金 */
-            --gold-hover: #f3e5ab;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --container-width: 1200px;
+            /* 模擬截圖中的金屬質感金 */
+            --gold: #e2c08d; 
+            --gold-dark: #b89258;
+            --container-width: 1240px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,21 +33,20 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-family: 'Noto Serif TC', serif; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         img { display: block; max-width: 100%; }
 
         .container {
             max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 40px; /* 增加兩側留白 */
+            padding: 0 40px;
         }
 
-        /* --- 1. 導覽列 (Header) --- */
+        /* --- 1. 導覽列 (Header) - 重點修正區 --- */
         .navbar {
             background-color: var(--bg-header);
-            padding: 20px 0;
-            border-bottom: 1px solid #222;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
         }
 
         .nav-inner {
@@ -57,60 +55,70 @@
             align-items: center;
         }
 
+        /* Brand Logo 區塊 - 依照 image_94003f.png */
         .brand {
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 1.3rem;
-            letter-spacing: 0.05em;
+            gap: 15px; /* 圖與文字的間距 */
         }
 
-        /* Logo 圖片樣式 */
         .brand-logo {
-            height: 45px;
-            width: 45px;
-            background: #333; /* 預防圖片未載入時的佔位色 */
-            border-radius: 4px;
+            height: 55px; /* 稍微放大 */
+            width: 55px;
+            border-radius: 0; /* 截圖中是正方形無圓角 */
             object-fit: cover;
         }
 
-        .brand-text {
-            font-family: 'Noto Serif TC', serif;
-            font-weight: 700;
+        .brand-text-group {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* 豎線與文字的間距 */
         }
-        .text-gold { color: var(--gold); }
-        .text-white { color: #fff; }
 
+        /* 文字樣式：大寶 | 紫微斗數 */
+        .brand-title {
+            font-family: 'Noto Sans TC', sans-serif; /* 截圖中偏向黑體 */
+            font-size: 2rem; /* 字體要大 */
+            font-weight: 900; /* 特粗 */
+            letter-spacing: 0.02em;
+            
+            /* 金色漸層文字效果 */
+            background: linear-gradient(to bottom, #ffeccf 0%, #d4af37 50%, #b89258 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* 模擬文字立體陰影 (Text Shadow) */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* 中間的豎線 */
+        .brand-divider {
+            width: 2px;
+            height: 28px;
+            background: linear-gradient(to bottom, #ffeccf, #d4af37);
+            margin: 0 5px;
+        }
+
+        /* 右側選單 */
         .menu {
             display: flex;
             gap: 30px;
             align-items: center;
         }
 
-        /* 選單連結樣式 - 純文字無按鈕感 */
         .menu a {
             font-size: 0.95rem;
-            color: #ddd;
+            color: #ccc;
             font-weight: 500;
             letter-spacing: 0.05em;
-            position: relative;
         }
-
-        .menu a:hover {
-            color: var(--gold);
-        }
-
-        .cart-icon {
-            display: flex;
-            align-items: center;
-            color: #ddd;
-            cursor: pointer;
-        }
+        .menu a:hover { color: var(--gold); }
+        .cart-icon { display: flex; align-items: center; color: #ccc; cursor: pointer; }
         .cart-icon:hover { color: var(--gold); }
 
         /* --- 2. 公告欄 --- */
         .announcement {
-            background-color: #1a1a1a;
+            background-color: #000;
             color: var(--gold);
             text-align: center;
             padding: 12px 20px;
@@ -119,61 +127,55 @@
             border-bottom: 1px solid #222;
         }
 
-        /* --- 3. 人物介紹區 (Hero) - 嚴格依照 image_891b96.jpg --- */
+        /* --- 3. Hero 形象區 --- */
         .hero-section {
             padding: 80px 0;
-            background-color: var(--bg-body);
+            background: #111; /* 純黑背景 */
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 0.8fr 1.2fr; /* 左窄右寬 */
-            gap: 80px; /* 拉大間距 */
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 80px;
             align-items: start;
         }
 
-        /* 左側照片 */
-        .hero-image {
-            position: relative;
-        }
         .hero-image img {
             width: 100%;
-            border-radius: 0; /* 截圖中看起來是直角或極小圓角 */
-            box-shadow: 0 0 30px rgba(0,0,0,0.8); /* 深邃陰影 */
+            /* 截圖中沒有圓角，直接直角 */
+            border-radius: 0; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
 
-        /* 右側文字 */
-        .hero-content {
-            padding-top: 10px;
-        }
+        .hero-content { padding-top: 10px; }
 
         .hero-name {
-            font-size: 3.5rem; /* 大標題 */
-            font-weight: 900; /* 特粗 */
+            font-family: 'Noto Serif TC', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             line-height: 1.2;
         }
 
         .hero-title {
-            font-family: 'Noto Sans TC', sans-serif; /* 截圖中副標題偏黑體 */
-            font-size: 1.2rem;
-            color: var(--gold);
-            font-weight: 500;
-            margin-bottom: 40px;
+            font-size: 1.3rem;
+            color: var(--gold); /* 使用新的金屬金 */
+            font-weight: 700;
+            margin-bottom: 35px;
             display: block;
             letter-spacing: 0.1em;
         }
 
         .hero-desc p {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: #bbb;
             margin-bottom: 25px;
-            line-height: 1.9;
-            text-align: justify; /* 左右對齊 */
+            line-height: 1.8;
+            text-align: justify;
         }
 
-        /* 金框透明按鈕 - 依照 image_8a0015.jpg */
+        /* 按鈕：透明金框 */
         .btn-outline-gold {
             display: inline-block;
             margin-top: 30px;
@@ -186,69 +188,58 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
+        .btn-outline-gold:hover { background: var(--gold); color: #000; }
 
-        .btn-outline-gold:hover {
-            background: var(--gold);
-            color: #000;
-        }
-
-        /* --- 4. 服務列表區 --- */
-        .services-section {
-            padding: 60px 0 100px;
-            border-top: 1px solid #222;
-        }
-        
-        /* 暫時隱藏原本的 Grid，因為您只要求首頁復刻，這裡保留結構以免空白 */
-        /* 您可以自行決定是否要保留這塊，或是這塊已經是 "服務頁面" 的內容 */
-
-        /* --- 5. 客戶回饋牆 (瀑布流) - 依照 image_93e95f.jpg --- */
+        /* --- 4. 客戶回饋牆 (瀑布流) --- */
         .reviews-section {
             padding: 80px 0 120px;
-            background-color: #0d0d0d; /* 比背景再深一點 */
+            background-color: #0d0d0d;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 2.8rem; /* 標題加大 */
+            font-weight: 700;
             color: #fff;
             margin-bottom: 60px;
-            font-weight: 700;
+            letter-spacing: 0.05em;
         }
 
-        /* 真正的瀑布流排版 */
         #waterfall-container {
-            column-count: 3; /* 三欄 */
-            column-gap: 20px; /* 欄間距 */
+            column-count: 3;
+            column-gap: 20px;
         }
 
         .review-item {
-            break-inside: avoid; /* 避免圖片被切斷 */
-            margin-bottom: 20px; /* 上下間距 */
-            border-radius: 8px;
+            break-inside: avoid;
+            margin-bottom: 20px;
+            border-radius: 6px;
             overflow: hidden;
-            background: #fff; /* 預設白底，以防圖片透明 */
+            background: #fff;
         }
 
-        .review-item img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .review-item img { width: 100%; height: auto; display: block; }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center; padding: 40px 0; color: #666; font-size: 0.9rem; border-top: 1px solid #222;
         }
 
-        /* --- RWD 響應式 --- */
+        /* --- RWD --- */
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; gap: 40px; }
             .hero-image { max-width: 500px; margin: 0 auto; }
-            .hero-content { text-align: left; }
             #waterfall-container { column-count: 2; }
         }
 
         @media (max-width: 768px) {
             .nav-inner { flex-direction: column; gap: 15px; }
-            .menu { flex-wrap: wrap; justify-content: center; font-size: 0.9rem; }
-            .hero-name { font-size: 2.5rem; }
-            #waterfall-container { column-count: 1; } /* 手機單欄 */
-            .container { padding: 0 20px; }
+            .brand { flex-direction: column; gap: 10px; }
+            .brand-text-group { gap: 5px; }
+            .brand-title { font-size: 1.8rem; }
+            .menu { flex-wrap: wrap; justify-content: center; }
+            #waterfall-container { column-count: 1; }
         }
     </style>
 </head>
@@ -258,8 +249,10 @@
         <div class="container nav-inner">
             <a href="#" class="brand">
                 <img src="./assets/logo.png" alt="Logo" class="brand-logo">
-                <div class="brand-text">
-                    <span class="text-gold">大寶</span> | <span class="text-white">紫微斗數</span>
+                <div class="brand-text-group">
+                    <span class="brand-title">大寶</span>
+                    <div class="brand-divider"></div>
+                    <span class="brand-title">紫微斗數</span>
                 </div>
             </a>
 
@@ -270,10 +263,9 @@
                 <a href="https://vocus.cc/salon/dabao" target="_blank">紫微斗數教學文章</a>
                 
                 <div class="cart-icon" title="購物車">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
-                    <span style="font-size: 0.9rem; margin-left: 5px;">購物車</span>
                 </div>
             </nav>
         </div>
@@ -316,26 +308,23 @@
     <section class="reviews-section">
         <div class="container">
             <h2 class="section-title">客戶回饋</h2>
-            
             <div id="waterfall-container"></div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px 0; color: #666; font-size: 0.9rem; border-top: 1px solid #222;">
+    <footer>
         <div class="container">
             <p>&copy; 2026 大寶紫微斗數 | 寶曜文化</p>
         </div>
     </footer>
 
     <script>
-        // 設定圖片總數：79 張
         const totalImages = 79;
         const container = document.getElementById('waterfall-container');
 
         for (let i = 1; i <= totalImages; i++) {
-            // 將數字轉為 001, 002... 格式
             const paddedNum = String(i).padStart(3, '0');
-            // 檔名假設為小寫 .jpg
+            // 注意檔名是小寫 .jpg
             const fileName = `${paddedNum}.jpg`;
 
             const div = document.createElement('div');
@@ -344,11 +333,10 @@
             const img = document.createElement('img');
             img.src = `./assets/${fileName}`; 
             img.alt = `客戶回饋 ${paddedNum}`;
-            img.loading = "lazy"; // 懶加載，提升速度
+            img.loading = "lazy";
 
-            // 如果圖片載入失敗 (例如檔名大小寫不對)，隱藏該區塊以免破壞版面
             img.onerror = function() {
-                console.warn(`無法載入圖片: ${fileName}`);
+                console.warn(`Load failed: ${fileName}`);
                 this.parentElement.style.display = 'none';
             };
 
